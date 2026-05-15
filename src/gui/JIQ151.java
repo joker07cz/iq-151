@@ -1106,6 +1106,32 @@ public class JIQ151 extends javax.swing.JFrame {
         
     }
     
+    private void processArgs(String[] args) {
+        for (int i = 0; i < args.length - 1; i++) {
+            String val = args[i + 1];
+            switch (args[i]) {
+                case "--tape":
+                    m.openLoadTape(val);
+                    i++;
+                    break;
+                case "--disk-a":
+                    utils.Config.strFlop1FilePath = val;
+                    utils.Config.bFlop1Inserted = true;
+                    utils.Config.bFlop1RW = false;
+                    floppyUpdate();
+                    i++;
+                    break;
+                case "--disk-b":
+                    utils.Config.strFlop2FilePath = val;
+                    utils.Config.bFlop2Inserted = true;
+                    utils.Config.bFlop2RW = false;
+                    floppyUpdate();
+                    i++;
+                    break;
+            }
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -1140,10 +1166,13 @@ public class JIQ151 extends javax.swing.JFrame {
         /*
          * Create and display the form
          */
+        final String[] finalArgs = args;
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new JIQ151().setVisible(true);
+                JIQ151 w = new JIQ151();
+                w.setVisible(true);
+                w.processArgs(finalArgs);
             }
         });
     }
