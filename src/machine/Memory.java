@@ -341,7 +341,7 @@ public final class Memory {
     }
     
     public byte readByte(int address) {
-        return readPages[address >>> PAGE_BIT][address & PAGE_MASK];
+        return readPages[(address & 0xFFFF) >>> PAGE_BIT][(address & 0xFFFF) & PAGE_MASK];
     }
     
     public void writeByte(int address, byte value) {

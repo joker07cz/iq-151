@@ -684,7 +684,11 @@ public class Iq extends Thread
                    }
                    return rVal;
             case 0xD4:
-                return graf.rpD4();
+                if (cfg.grafik) {
+                    return graf.rpD4();
+                } else {
+                    return 0xFF;
+                }
                          
             case 0xF8:
                 if (cfg.getSDRom()) {
